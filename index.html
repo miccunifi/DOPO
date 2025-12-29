@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dense Preference Optimization for Cross-Dataset Motion Diffusion Adaptation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Dense Preference Optimization for Cross-Dataset Motion Diffusion Adaptation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://keunhong.com">Girolamo Macaluso*</a>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Lorenzo Mandelli*</a>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Mirko Bicchierai*</a>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Stefano Berretti</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Adrew D. Bagdanov</a>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Media Integration and Communication Center (MICC), University of
+Florence, Florence, Italy.</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+
+        <div style="text-align: center; margin: 10px 0;">
+          <i>"A person in a fighting stance does two kicks with their right leg."</i>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 10px;">
+          <img src="./static/images/1_PT.png" style="max-width: 45%;">
+          <img src="./static/images/1_FT.png" style="max-width: 45%;">
+        </div>
+
+        <div style="text-align: center; margin: 10px 0;">
+          <i>"A person walks forward then turns around and walks back."</i>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+          <img src="./static/images/2_PT.png" style="max-width: 45%;">
+          <img src="./static/images/2_FT.png" style="max-width: 45%;">
+        </div>
+
+      <br>
+      <p class="content has-text-justified">
+        <b>Figure</b>: Qualitative comparison of generated animations before and after fine-tuning. Each row shows the same text prompt with results from the pretrained MDM on BABEL (left) and the model finetune with our approach on HumanML3D (right). Our fine-tuning improves motion quality and text-motion alignment. 
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+
+      </div>
+    </div>
+
+    <div class="content has-text-justified">
+      <p>
+        Adapting text-conditioned motion diffusion models to new domains typically requires collecting additional motion capture data and retraining from scratch, a process that is expensive, time-consuming, and often impractical. We present a post-training framework that fine-tunes pretrained motion diffusion models using only textual prompts from the target domain, without requiring any ground-truth motion data. Our approach builds on two components: (1) a timestep-conditioned text-motion retrieval network (TMR-Dense) that evaluates motion-text alignment at arbitrary points along the denoising trajectory, enabling dense preference signals throughout generation; and (2) an adaptation of Step-by-Step Preference Optimization (SPO) that leverages these signals to guide the diffusion model toward the target distribution. Unlike prior reinforcement learning approaches that rely on sparse terminal rewards, our method provides step-aware supervision while avoiding the instabilities associated with policy gradient optimization. We evaluate our approach on cross-dataset adaptation scenarios spanning BABEL, HumanML3D, and MotionX, testing both latent-space and joint-space diffusion architectures. Experimental results indicate consistent improvements over zero-shot baselines and our prior RL-based method across most metrics, with training times reduced by approximately an order of magnitude. The framework preserves performance on source distributions after adaptation, suggesting that preference-based fine-tuning offers a practical path toward more adaptable motion generation systems.
+      </p>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Approach Overview</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/spo_borderless.svg" height="100%">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparison</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Pretrained MDM</h2>
+          <p><i>Prompt</i></p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dollyzoom-stacked.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-4">Pretrained StableMoFusion </h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p><i>Prompt</i></p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Ours MDM finetuned</h2>
+          <p><i>Prompt</i></p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dollyzoom-stacked.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-4">Ours StableMoFusion finetuned </h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p><i>Prompt</i></p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!--/ Matting. -->
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Related Motion Generation Works 🚀🚀</h2>
+
+          </div>
+        </div>
+        
+        <div class="content has-text-justified">
+          <a href="https://ericguo5513.github.io/momask/"><b>MoMask</b></a>: Generative masked modeling for text-driven human motion synthesis with discrete representations.<br>
+          <a href="https://motion-gpt.github.io/"><b>MotionGPT</b></a>: Unified motion-language framework for motion generation, understanding and captioning.<br>
+          <a href="https://arxiv.org/abs/2510.06988"><b>NoMocap Needed</b></a>: Finetuning motion diffusion model with a RL approach.<br>
+          <a href="https://arxiv.org/abs/2405.05691"><b>StableMoFusion</b></a>: Stable diffusion-based approach for controllable and high-quality motion generation.<br>
+          </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<!--
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section>
+-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>* These authors contributed to this work equally.</p>
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>Website source code based on the Nerfies <a
+              href="https://github.com/nerfies/nerfies.github.io">project page</a>. If you want to reuse their source code, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
