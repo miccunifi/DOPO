@@ -1,6 +1,6 @@
-# Nerfies
+# DOPO: Dense Online Preference Optimization for Cross-Dataset Motion Diffusion Adaptation
 
-This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).
+<!--This is the repository that contains source code for the [Nerfies website](https://nerfies.github.io).-->
 
 If you find Nerfies useful for your work please cite:
 ```
