@@ -1,0 +1,5 @@
+defaults:
+  - ../TMR/model/tmr@_global_.model
+  - ../TMR/defaults@_global_
+  - ../TMR/trainer@@_global_         
+  - _self_

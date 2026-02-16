@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Render NPZ Video</title>
+</head>
+<body>
+<h1>Drop your .npy file here</h1>
+<form method="POST" enctype="multipart/form-data" id="upload-form">
+    <input type="file" name="file" id="file-input" accept=".npy">
+    <button type="submit" name="render_mode" value="joints">Render Joints</button>
+    <button type="submit" name="render_mode" value="smpl">Render SMPL</button>
+
+    <!-- Hidden inputs for checkboxes -->
+    <input type="hidden" name="y_is_z_axis" id="hidden_y_is_z_axis">
+    <input type="hidden" name="x_axis_flag" id="hidden_x_axis_flag">
+    <input type="hidden" name="rotation_mesh" id="hidden_rotation_mesh">
+</form>
+
+<div id="file-info" style="margin-top:20px; {% if not file_info %}display:none;{% endif %}">
+    <h2>File Properties:</h2>
+    <table border="1" cellpadding="5">
+        <tr><td>Shape</td><td id="shape">{% if file_info %}{{ file_info.shape }}{% endif %}</td></tr>
+        <tr><td>Frames</td><td id="frames">{% if file_info %}{{ file_info.frames }}{% endif %}</td></tr>
+        <tr><td>y_is_z_axis</td>
+            <td><input type="checkbox" id="y_is_z_axis" {% if file_info and file_info.y_is_z_axis %}checked{% endif %}></td></tr>
+        <tr><td>x_axis_flag</td>
+            <td><input type="checkbox" id="x_axis_flag" {% if file_info and file_info.x_axis_flag %}checked{% endif %}></td></tr>
+        <tr><td>rotation_mesh</td>
+            <td><input type="checkbox" id="rotation_mesh" {% if file_info and file_info.rotation_mesh %}checked{% endif %}></td></tr>
+        <tr><td>Format</td><td id="format">{% if file_info %}{{ file_info.format }}{% endif %}</td></tr>
+    </table>
+</div>
+
+{% if video_path %}
+<h2>Video Rendered:</h2>
+<video width="640" height="480" controls>
+    <source src="{{ video_path }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+{% endif %}
+
+<script>
+function syncCheckboxToHidden(checkboxId, hiddenId) {
+    document.getElementById(checkboxId).addEventListener("change", function() {
+        document.getElementById(hiddenId).value = this.checked ? "on" : "";
+    });
+}
+
+document.getElementById("file-input").addEventListener("change", function() {
+    const file = this.files[0];
+    if(!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/analyze", {method:"POST", body:formData})
+    .then(res => res.json())
+    .then(data => {
+        if(data.error) { alert(data.error); return; }
+        document.getElementById("shape").textContent = data.shape;
+        document.getElementById("frames").textContent = data.frames;
+        document.getElementById("y_is_z_axis").checked = data.y_is_z_axis;
+        document.getElementById("x_axis_flag").checked = data.x_axis_flag;
+        document.getElementById("rotation_mesh").checked = data.rotation_mesh;
+        document.getElementById("format").textContent = data.format;
+
+        const btnJ = document.querySelector('button[value="joints"]');
+        const btnS = document.querySelector('button[value="smpl"]');
+
+        if(data.format==="Joints" || data.format==="Guofeats") {
+            btnJ.disabled=false; btnS.disabled=false;
+        } else if(data.format==="SMPL" || data.format==="SMPL-vertices") {
+            btnJ.disabled=true; btnS.disabled=false;
+        } else {
+            btnJ.disabled=true; btnS.disabled=true;
+        }
+
+        document.getElementById("file-info").style.display="block";
+    });
+});
+
+// Sync all checkboxes to hidden fields
+syncCheckboxToHidden("y_is_z_axis", "hidden_y_is_z_axis");
+syncCheckboxToHidden("x_axis_flag", "hidden_x_axis_flag");
+syncCheckboxToHidden("rotation_mesh", "hidden_rotation_mesh");
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+run_dir: outputs/${hydra:runtime.choices.model}_${hydra:runtime.choices.data}_${hydra:runtime.choices.data/motion_loader}
+
+defaults:
+  - train
+  - override /model: tmr_hn
+  - _self_

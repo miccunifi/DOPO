@@ -1,0 +1,44 @@
+# Main evaluation config
+defaults:
+  - data: humanml3d  # <--- Cambiato qui
+  - evaluator: guo # densetmr guo dense
+  - _self_
+
+# Dataset override (can be overridden from command line)
+data:
+  motion_loader:
+    with_noise: false
+
+# Split to evaluate on
+split: test
+
+# Evaluation settings
+device: cuda
+batch_size: 32
+max_samples: null
+
+# Metric settings
+distance_metric: ??? # euclidean or cosine
+diversity_times: 300
+multimodality_times: 20
+
+# Retrieval calculation settings
+retrieval_batch_size: 32 # -1 = entire dataset, 32 = batched like original paper
+
+# Output
+evaluator_name: ${hydra:runtime.choices.evaluator}
+data_name: ${data.dataset_name}
+output_dir: evaluation_results/${evaluator_name}_${data_name}_${split}
+
+# Logging
+seed: 1234
+logger_level: INFO
+
+# Hydra
+hydra:
+  run:
+    dir: ${output_dir}
+  job_logging:
+    handlers:
+      file:
+        filename: ${output_dir}/evaluation.log

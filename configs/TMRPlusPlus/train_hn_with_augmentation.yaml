@@ -1,0 +1,4 @@
+defaults:
+  - train_with_augmentation
+  - override model: tmr_text_averaging_hn
+  - _self_

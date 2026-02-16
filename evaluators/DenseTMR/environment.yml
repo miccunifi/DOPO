@@ -1,0 +1,9 @@
+name: TMR
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - python=3.10
+  - pytorch-cuda=12.1
+  - torchvision==0.18.1
+prefix: /home/gmacaluso/miniconda3/envs/TMR

@@ -1,0 +1,33 @@
+_target_: src.data.text_motion_handler.TextMotionDatasetHandler
+dataset_name: ???
+augmented: true
+path: /deck/datasets/Black_datasets(H_K_B)/annotations/${data.dataset_name}
+
+with_noise: false
+
+motion_loader_name: ${hydra:runtime.choices.data/motion_loader}
+base_dir: /deck/datasets/Black_datasets(H_K_B)/motions/${data.motion_loader_name}
+
+paraphrase_filename: annotations_paraphrases.json
+summary_filename: annotations_actions.json
+paraphrase_prob: 0.2
+summary_prob: 0.2
+averaging_prob: 0.4
+text_sampling_nbr: null
+
+text_to_token_emb:
+  _target_: src.data.text.TokenEmbeddings
+  path: /deck/datasets/Black_datasets(H_K_B)/annotations/${data.dataset_name}
+  modelname: distilbert-base-uncased
+  preload: true
+text_to_sent_emb:
+  _target_: src.data.text.SentenceEmbeddings
+  path: /deck/datasets/Black_datasets(H_K_B)/annotations/${data.dataset_name}
+  modelname: sentence-transformers/all-mpnet-base-v2
+  preload: true
+preload: true
+clip_embedder: true
+
+defaults:
+  - motion_loader: smplrifke
+  - _self_

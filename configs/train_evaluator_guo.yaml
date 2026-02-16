@@ -1,0 +1,16 @@
+# TODO lo ha fatto claude, in teroa per allenare la fase 4 di Guo. Vorrei toglierlo e gestuirlo da bash 
+# per avere un unico train_evaluator.yaml
+ckpt: last
+resume_dir: null
+
+run_dir: outputs/${hydra:runtime.choices.evaluator}_${hydra:runtime.choices.data}
+
+dataloader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 8  # Come nell'originale
+  num_workers: 4
+  collate_fn: ???  # Sarà sovrascritto
+
+defaults:
+  - data: humanml3d
+  - evaluator: guo

@@ -1,0 +1,60 @@
+# configs/model/mdm_spo_adapter.yaml
+_target_: models.mdm_spo_adapter.MDM_SPO_adapter
+
+# Base MDM parameters (inherited)
+denoiser:
+  _target_: models.MDM.src.model.mdm_smpl.TransformerDenoiser
+  nfeats: ${data.motion_loader.nfeats}
+  tx_dim: 512
+  latent_dim: 512
+  ff_size: 2048
+  num_layers: 8
+  num_heads: 8
+  dropout: 0.1
+  activation: gelu
+  nb_registers: 2
+
+schedule:
+  _target_: models.MDM.src.model.schedule.cosine.CosineBetaSchedule
+  s: 0.008
+
+motion_normalizer:
+  _target_: src.data.motion.Normalizer
+  base_dir: stats/${hydra:runtime.choices.data}/${hydra:runtime.choices.data/motion_loader}
+  eps: 1e-12
+  disable: false
+
+text_normalizer:
+  _target_: src.data.motion.Normalizer
+  base_dir: stats/${hydra:runtime.choices.data}/text_stats_ViT-B/32
+  eps: 1e-12
+
+timesteps: 100
+prediction: x
+lr: 1e-6
+beta1: 0.9
+beta2: 0.999
+eps: 1e-8
+weight_decay: 1e-4
+
+# SPO-specific parameters
+beta: 10.0
+advantage_clip_epsilon: 0.1
+k_samples: 12
+train_epochs: 20
+train_iterations: 1000
+train_batch_size: 256
+grad_clip: 1.0
+update_reference_every_n_steps: null  # null = never update, or set a number like 100
+
+# Model checkpoint
+checkpoint_dir: ???
+ckpt: best
+
+dense_reward_model: ${evaluator}
+
+lora: True
+lora_rank: 4
+lora_alpha: 16
+lora_dropout: 0.1
+lora_bias: "none"

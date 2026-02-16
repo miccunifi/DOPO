@@ -1,0 +1,7 @@
+# @package _global_.evaluator
+
+_target_: evaluators.DenseTMR.densetmr_handler.DenseTMREvaluatorHandler
+
+checkpoint_dir: outputs/densetmr_humanml3d_smplrifke
+device: ${device}
+ckpt: last  # o "best" se hai salvato il best model

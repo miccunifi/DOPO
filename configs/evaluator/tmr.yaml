@@ -1,0 +1,7 @@
+# @package _global_.evaluator
+
+_target_: evaluators.TMR.tmr_handler.TMREvaluatorHandler
+
+checkpoint_dir: outputs/tmr_humanml3d_smplrifke
+device: ${device}
+ckpt: last  # o "best" se hai salvato il best model

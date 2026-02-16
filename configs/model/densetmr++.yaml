@@ -1,0 +1,5 @@
+defaults:
+  - ../DenseTMR/model/tmr_text_averaging@_global_.model
+  - ../DenseTMR/defaults@_global_           
+  - ../DenseTMR/trainer@_global_             
+  - _self_  

@@ -1,0 +1,16 @@
+defaults:
+  - data: humanml3d
+  - evaluator: densetmr
+  - model: mdm_spo
+  - _self_
+
+resume_dir: null
+
+group_name: "None"
+
+run_dir: outputs/${hydra:runtime.choices.model}_${data.dataset_name}_${hydra:runtime.choices.data/motion_loader}
+
+dataloader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 256 
+  num_workers: 8

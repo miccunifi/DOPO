@@ -1,0 +1,14 @@
+ckpt: last
+resume_dir: null
+
+run_dir: outputs/${hydra:runtime.choices.model}_${data.dataset_name}_${hydra:runtime.choices.data/motion_loader}
+
+dataloader:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 32
+  num_workers: 8
+
+defaults:
+  - data: kitml                     # humanml3d     OR kit                                  OR bable
+  - model: densetmr                     # tmrplusplus   OR densetmr                            OR tmr
+  - _self_

@@ -1,0 +1,21 @@
+_target_: evaluators.Guo.guo_lightning.GuoLightning
+
+# Architecture
+dim_pose: 263  # Per HumanML3D
+dim_movement_enc_hidden: 512
+dim_movement_latent: 512
+dim_word: 300
+dim_pos_ohot: 15
+dim_text_hidden: 512
+dim_motion_hidden: 1024
+dim_coemb_hidden: 512
+
+# Training
+lr: 1.0e-4
+gamma: 0.1
+milestones: [50, 100, 150, 200]
+negative_margin: 1.0
+
+# Pretrained movement encoder (da fase 1)
+movement_enc_checkpoint: evaluators/Guo/checkpoints/${data.dataset_name}/Decomp_SP001_SM001_H512/model/latest.tar
+freeze_movement_enc: true

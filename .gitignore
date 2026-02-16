@@ -1,0 +1,10 @@
+__pycache__/
+outputs/
+wandb/
+evaluation_results/
+logs/
+.vscode/
+deps/
+evaluators/DenseTMR/datasets_stepbystep/
+evaluators/Guo/checkpoints/
+evaluators/DenseTMR/TM2T/

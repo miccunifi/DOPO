@@ -1,0 +1,9 @@
+# @package _global_.evaluator
+
+_target_: evaluators.Guo.guo_handler.GuoEvaluatorHandler
+
+dataset: ${data.dataset_name}
+device: ${device}
+checkpoints_dir: evaluators/Guo/checkpoints
+glove_path: ./evaluators/Guo/glove
+meta_dir: null

@@ -1,0 +1,22 @@
+defaults:
+  - data: kitml
+  - _self_
+
+run_dir: logs
+
+hydra:
+  run:
+    dir: ${run_dir}
+
+seed: 1234
+logger_level: INFO
+
+data:
+  preload: false
+  motion_loader:
+    normalizer:
+      disable: true
+  text_to_token_emb:
+    disable: true
+  text_to_sent_emb:
+    disable: true

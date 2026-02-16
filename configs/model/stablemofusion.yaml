@@ -1,0 +1,5 @@
+defaults:
+  - ../StableMoFusion/model/unet@_global_.model
+  - ../StableMoFusion/defaults@_global_
+  - ../StableMoFusion/trainer@_global_
+  - _self_

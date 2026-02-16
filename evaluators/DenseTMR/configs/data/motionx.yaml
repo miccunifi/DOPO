@@ -1,0 +1,19 @@
+defaults:
+  - _base
+  - _self_
+
+path: "/deck/datasets/MotionX(smplrifke)"
+
+text_to_token_emb:
+  _target_: src.data.text.TokenEmbeddings
+  path: "/deck/datasets/MotionX(smplrifke)"
+  modelname: distilbert-base-uncased
+  preload: true
+
+text_to_sent_emb:
+  _target_: src.data.text.SentenceEmbeddings
+  path: "/deck/datasets/MotionX(smplrifke)"
+  modelname: sentence-transformers/all-mpnet-base-v2
+  preload: true
+
+preload: true

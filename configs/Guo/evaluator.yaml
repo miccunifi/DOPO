@@ -1,0 +1,7 @@
+_target_: evaluators.Guo.guo_handler.GuoEvaluatorHandler
+
+dataset: ${data.dataset_name}  # humanml3d, kit_22, babel, motionx
+device: cuda
+checkpoints_dir: evaluators/Guo/checkpoints
+glove_path: ./evaluators/Guo/glove
+meta_dir: null  # Se null, viene inferito automaticamente
