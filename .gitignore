@@ -8,3 +8,11 @@ deps/
 evaluators/DenseTMR/datasets_stepbystep/
 evaluators/Guo/checkpoints/
 evaluators/DenseTMR/TM2T/
+
+# Checkpoints
+*.ckpt
+
+# Archive files
+*.tar
+*.tar.gz
+*.tar.bz2
