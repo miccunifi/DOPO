@@ -331,6 +331,7 @@ def evaluate(cfg: DictConfig):
     motion_mu = motion_embs.mean(dim=0).numpy()
     motion_sigma = np.cov(motion_embs.numpy(), rowvar=False)
     
+    print("⚠️  -  FID SBAGLIATA: tra motion e text")
     fid = calculate_frechet_distance(text_mu, text_sigma, motion_mu, motion_sigma)
     results["FID"] = float(fid)
     

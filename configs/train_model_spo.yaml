@@ -8,6 +8,8 @@ resume_dir: null
 
 group_name: "None"
 
+reserve_gpu: true
+
 run_dir: outputs/${hydra:runtime.choices.model}_${data.dataset_name}_${hydra:runtime.choices.data/motion_loader}
 
 dataloader:

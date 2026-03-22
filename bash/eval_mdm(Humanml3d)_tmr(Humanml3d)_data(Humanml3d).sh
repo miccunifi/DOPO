@@ -10,4 +10,4 @@ HYDRA_FULL_ERROR=1 python eval_model.py \
     data.text_to_token_emb=false \
     data.text_to_sent_emb=false \
     distance_metric='cosine' \
-    model_ckpt="best"
+    model_ckpt="last"

@@ -1,4 +1,5 @@
 
+# MotionX -> HumanML3D (lr=1e-6)
 HYDRA_FULL_ERROR=1 python train_model_spo.py \
     data=humanml3d \
     model=mdm_spo \
@@ -7,12 +8,10 @@ HYDRA_FULL_ERROR=1 python train_model_spo.py \
     data.text_to_sent_emb=false \
     dataloader.batch_size=190 \
     model.train_batch_size=190 \
-    model.lr=1e-7 \
+    model.lr=1e-6 \
     model.lora=True \
     model.ckpt="last" \
     evaluator.checkpoint_dir='outputs/densetmr_humanml3d_smplrifke' \
-    model.checkpoint_dir='outputs/mdm_babel_smplrifke' \
-    run_dir='outputs/mdmspo_babel_to_humanml3d_smplrifke_lr1e-7_bs190' \
+    model.checkpoint_dir='outputs/mdm_motionx_smplrifke' \
     trainer.max_epochs=20 \
-    group_name='B2H' 
-    
+    group_name='M2H'

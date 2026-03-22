@@ -16,3 +16,5 @@ evaluators/DenseTMR/TM2T/
 *.tar
 *.tar.gz
 *.tar.bz2
+
+.claude

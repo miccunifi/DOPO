@@ -357,8 +357,33 @@ def evaluate(cfg: DictConfig):
     model_cfg = read_config(checkpoint_dir)
     model = instantiate(model_cfg.model)
     
-    # Load checkpoint weights
-    model_checkpoint_dir = checkpoint_dir / "logs/checkpoints" / f"{cfg.model_ckpt}.ckpt"
+    # Load checkpoint weights — support both standard (logs/checkpoints/) and
+    # SPO-style (checkpoints/) directory layouts, plus glob for best-epoch=*.ckpt
+    def _resolve_ckpt(base: Path, ckpt_name: str) -> Path:
+        candidates = [
+            base / "logs/checkpoints" / f"{ckpt_name}.ckpt",
+            base / "checkpoints" / f"{ckpt_name}.ckpt",
+        ]
+        for p in candidates:
+            if p.exists():
+                return p
+        # Handle "best" glob (e.g. best-epoch=3-Validation.tmr=0.657.ckpt)
+        if ckpt_name == "best":
+            for ckpt_dir in [base / "logs/checkpoints", base / "checkpoints"]:
+                matches = sorted(ckpt_dir.glob("best-*.ckpt")) if ckpt_dir.exists() else []
+                if matches:
+                    # Pick the one with the highest TMR value in the filename
+                    def _tmr(p):
+                        import re
+                        m = re.search(r'tmr=([0-9.]+)', p.name)
+                        return float(m.group(1)) if m else 0.0
+                    return max(matches, key=_tmr)
+        raise FileNotFoundError(
+            f"Checkpoint '{ckpt_name}' not found in {base}/logs/checkpoints/ "
+            f"or {base}/checkpoints/"
+        )
+
+    model_checkpoint_dir = _resolve_ckpt(checkpoint_dir, cfg.model_ckpt)
     logger.info(f"Loading model from checkpoint: {model_checkpoint_dir}")
 
     if not model_checkpoint_dir.exists():

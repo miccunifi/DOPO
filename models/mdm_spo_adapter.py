@@ -125,7 +125,7 @@ class MDM_SPO_adapter(MDM_adapter):
             ckpt_path = checkpoint_dir / "logs/checkpoints" / f"{ckpt}.ckpt"
             if not ckpt_path.exists():
                 raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
-            checkpoint = torch.load(ckpt_path, weights_only=False)
+            checkpoint = torch.load(ckpt_path, weights_only=False, map_location="cpu")
             self.load_state_dict(checkpoint['state_dict'])
             logger.info(f"Loaded model weights from checkpoint: {ckpt_path}")
 

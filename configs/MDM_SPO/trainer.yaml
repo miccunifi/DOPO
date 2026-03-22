@@ -8,7 +8,7 @@ trainer:
   accelerator: gpu
   devices: 1
   val_check_interval: 1 
-  limit_val_batches: 3  
+  limit_val_batches: 5  
 
   callbacks:
     - _target_: pytorch_lightning.callbacks.ModelCheckpoint
