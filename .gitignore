@@ -18,3 +18,16 @@ evaluators/DenseTMR/TM2T/
 *.tar.bz2
 
 .claude
+
+# Excluded bash scripts
+bash/train_tmrplusplus_humanml3d++_smplrifke.sh
+bash/train_tmrplusplus_ALL++_smplrifke.sh
+bash/train_tmr_humanml3d_smplrifke.sh
+bash/train_tmr_humanml3d_guofeats.sh
+bash/train_tmr_ALL_smplrifke.sh
+bash/train_stablemofusion_humanml3d_smplrifke.sh
+bash/train_stablemofusion_ALL_smplrifke.sh
+bash/eval_tmr_humanml3d_guoh3dfeats.sh
+bash/eval_tmr_humanml3d_smplrifke.sh
+bash/eval_tmrplusplus_humanml3d_smplrifke.sh
+bash/DEBUG_train_mdmspo_humanml3d_2_kitml.sh

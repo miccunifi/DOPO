@@ -227,6 +227,9 @@ Reported metrics: R@1/R@3/R@10, MedR (T2M and M2T), FID, diversity, multimodalit
 - [ ] Add StableMoFusion support as a generative backbone
 - [ ] Add support for additional datasets
 - [ ] Add arXiv link
+- [ ] Release checkpoints for pretrained models
+- [ ] Release checkpoints for trained evaluators
+- [ ] Release checkpoints for fine-tuned models
 
 ---
 
