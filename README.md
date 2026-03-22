@@ -4,6 +4,8 @@
 
 DOPO adapts a text-to-motion diffusion model (MDM) pretrained on a **source** dataset to generate motions that align with the distribution of a **target** dataset — without requiring paired data. It uses a DenseTMR evaluator trained on the target dataset as a dense reward signal during online preference optimization (SPO).
 
+![DOPO pipeline](images/spo.png)
+
 ---
 
 ## Overview
