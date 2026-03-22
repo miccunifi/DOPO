@@ -1,5 +1,7 @@
 # DOPO: Dense Online Preference Optimization for Cross-Dataset Motion Diffusion Adaptation
 
+[![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://miccunifi.github.io/DOPO/) [![arXiv](https://img.shields.io/badge/arXiv-coming%20soon-red)]()
+
 DOPO adapts a text-to-motion diffusion model (MDM) pretrained on a **source** dataset to generate motions that align with the distribution of a **target** dataset — without requiring paired data. It uses a DenseTMR evaluator trained on the target dataset as a dense reward signal during online preference optimization (SPO).
 
 ---
@@ -34,7 +36,7 @@ pip install git+https://github.com/openai/CLIP.git
 
 ## Stage 1 — Pretrain a model
 
-Train an MDM model from scratch on a source dataset using the SMPL-RiFKE motion representation.
+Train an MDM model from scratch on a source dataset using the SMPL-RiFKE motion representation (introducted in [link](https://arxiv.org/abs/2401.08559)).
 
 ```bash
 # HumanML3D
@@ -215,6 +217,14 @@ Reported metrics: R@1/R@3/R@10, MedR (T2M and M2T), FID, diversity, multimodalit
 ├── bash/                   # Convenience training/evaluation scripts
 └── outputs/                # Saved checkpoints (created at runtime)
 ```
+
+---
+
+## TODO
+
+- [ ] Add StableMoFusion support as a generative backbone
+- [ ] Add support for additional datasets
+- [ ] Add arXiv link
 
 ---
 
